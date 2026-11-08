@@ -16,9 +16,18 @@
         "prototype",
         "review"
       ],
-      "verified": false,
-      "reviewedBy": [],
-      "history": []
+      "verified": true,
+      "reviewedBy": [
+        "Teamtrail maintainers"
+      ],
+      "history": [
+        {
+          "version": "1.0.0",
+          "commit": "9138782f4e6e38068cfa8caed0b68f824691be96",
+          "at": "2026-11-08T12:41:46+01:00",
+          "reviewer": "Teamtrail maintainers"
+        }
+      ]
     },
     {
       "id": "architect",
@@ -34,9 +43,18 @@
         "prototype",
         "task"
       ],
-      "verified": false,
-      "reviewedBy": [],
-      "history": [],
+      "verified": true,
+      "reviewedBy": [
+        "Teamtrail maintainers"
+      ],
+      "history": [
+        {
+          "version": "1.0.0",
+          "commit": "9138782f4e6e38068cfa8caed0b68f824691be96",
+          "at": "2026-11-08T12:41:46+01:00",
+          "reviewer": "Teamtrail maintainers"
+        }
+      ],
       "builtin": true
     },
     {
@@ -52,9 +70,18 @@
         "task",
         "execute"
       ],
-      "verified": false,
-      "reviewedBy": [],
-      "history": [],
+      "verified": true,
+      "reviewedBy": [
+        "Teamtrail maintainers"
+      ],
+      "history": [
+        {
+          "version": "1.0.0",
+          "commit": "9138782f4e6e38068cfa8caed0b68f824691be96",
+          "at": "2026-11-08T12:41:46+01:00",
+          "reviewer": "Teamtrail maintainers"
+        }
+      ],
       "builtin": true
     },
     {
@@ -70,9 +97,18 @@
         "execute",
         "prototype"
       ],
-      "verified": false,
-      "reviewedBy": [],
-      "history": [],
+      "verified": true,
+      "reviewedBy": [
+        "Teamtrail maintainers"
+      ],
+      "history": [
+        {
+          "version": "1.0.0",
+          "commit": "9138782f4e6e38068cfa8caed0b68f824691be96",
+          "at": "2026-11-08T12:41:46+01:00",
+          "reviewer": "Teamtrail maintainers"
+        }
+      ],
       "builtin": true
     },
     {
@@ -86,9 +122,18 @@
       "types": [
         "review"
       ],
-      "verified": false,
-      "reviewedBy": [],
-      "history": [],
+      "verified": true,
+      "reviewedBy": [
+        "Teamtrail maintainers"
+      ],
+      "history": [
+        {
+          "version": "1.0.0",
+          "commit": "9138782f4e6e38068cfa8caed0b68f824691be96",
+          "at": "2026-11-08T12:41:46+01:00",
+          "reviewer": "Teamtrail maintainers"
+        }
+      ],
       "builtin": true
     },
     {
@@ -105,9 +150,18 @@
         "execute",
         "review"
       ],
-      "verified": false,
-      "reviewedBy": [],
-      "history": [],
+      "verified": true,
+      "reviewedBy": [
+        "Teamtrail maintainers"
+      ],
+      "history": [
+        {
+          "version": "1.0.0",
+          "commit": "9138782f4e6e38068cfa8caed0b68f824691be96",
+          "at": "2026-11-08T12:41:46+01:00",
+          "reviewer": "Teamtrail maintainers"
+        }
+      ],
       "builtin": true
     }
   ]

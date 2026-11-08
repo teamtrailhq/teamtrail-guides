@@ -11,7 +11,7 @@ This repo is the public catalog. Each guide is one plain markdown file in [`guid
 <!-- guides:start -->
 | Guide | Id | Version | Status | What it does | Author |
 | --- | --- | --- | --- | --- | --- |
-| [Accessibility](guides/a11y.md) | `a11y` | 1.0.0 | Not reviewed yet | Checks that new UI works with a keyboard, a screen reader and enough contrast. An example community guide. | Teamtrail (example) |
+| [Accessibility](guides/a11y.md) | `a11y` | 1.0.0 | Verified | Checks that new UI works with a keyboard, a screen reader and enough contrast. An example community guide. | Teamtrail (example) |
 | [Architect](guides/architect.md) | `architect` | 1.0.0 | Built in | Shapes how the change fits the system before and while it is built. | Teamtrail |
 | [Docs](guides/docs.md) | `docs` | 1.0.0 | Built in | Keeps the docs, examples and changelog true to what the code does. | Teamtrail |
 | [QA](guides/qa.md) | `qa` | 1.0.0 | Built in | Tests the change like a user would and makes sure the tests cover it. | Teamtrail |
