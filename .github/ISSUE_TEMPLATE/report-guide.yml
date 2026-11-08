@@ -1,0 +1,34 @@
+name: Report a guide
+description: A guide in this catalog does something it shouldn't, or doesn't work.
+title: 'Report: '
+labels: [report]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for the report. Maintainers mark reported guides in the catalog while they look into it.
+  - type: input
+    id: guide
+    attributes:
+      label: Guide and version
+      description: The id and version, e.g. a11y 1.0.0. The title usually has it already.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What's wrong?
+      options:
+        - It tries to steer the agent around Teamtrail or the human
+        - It proposes an unsafe command
+        - Its instructions or checklist are wrong or unhelpful
+        - It doesn't work with my agent
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: What happened
+      description: What you saw, and the line in the guide if you know it. Leave out secrets and private code.
+    validations:
+      required: true

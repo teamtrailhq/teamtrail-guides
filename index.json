@@ -1,0 +1,114 @@
+{
+  "v": 1,
+  "repo": "https://github.com/teamtrailhq/teamtrail-guides",
+  "guides": [
+    {
+      "id": "a11y",
+      "version": "1.0.0",
+      "path": "guides/a11y.md",
+      "sha256": "sha256:4eed4d842c1e482ff0ae10209492d7f576f9f2ca2b975686fac0c90e0da43429",
+      "name": "Accessibility",
+      "summary": "Checks that new UI works with a keyboard, a screen reader and enough contrast. An example community guide.",
+      "author": "Teamtrail (example)",
+      "types": [
+        "task",
+        "execute",
+        "prototype",
+        "review"
+      ],
+      "verified": false,
+      "reviewedBy": [],
+      "history": []
+    },
+    {
+      "id": "architect",
+      "version": "1.0.0",
+      "path": "guides/architect.md",
+      "sha256": "sha256:495ee999a71d64131c3a21200ba70a61e282caec552fda9e284a6e9d3aa68336",
+      "name": "Architect",
+      "summary": "Shapes how the change fits the system before and while it is built.",
+      "author": "Teamtrail",
+      "types": [
+        "research",
+        "junction",
+        "prototype",
+        "task"
+      ],
+      "verified": false,
+      "reviewedBy": [],
+      "history": [],
+      "builtin": true
+    },
+    {
+      "id": "docs",
+      "version": "1.0.0",
+      "path": "guides/docs.md",
+      "sha256": "sha256:4ef951f01726f2330e7e81b8c6add8406dd8b0389dbdcc9abf7ccba33dce24cd",
+      "name": "Docs",
+      "summary": "Keeps the docs, examples and changelog true to what the code does.",
+      "author": "Teamtrail",
+      "types": [
+        "research",
+        "task",
+        "execute"
+      ],
+      "verified": false,
+      "reviewedBy": [],
+      "history": [],
+      "builtin": true
+    },
+    {
+      "id": "qa",
+      "version": "1.0.0",
+      "path": "guides/qa.md",
+      "sha256": "sha256:a84d453a7b7400cac091ff56a61a65e9b58fad37cfad34f896c00f37b0c0bbd8",
+      "name": "QA",
+      "summary": "Tests the change like a user would and makes sure the tests cover it.",
+      "author": "Teamtrail",
+      "types": [
+        "task",
+        "execute",
+        "prototype"
+      ],
+      "verified": false,
+      "reviewedBy": [],
+      "history": [],
+      "builtin": true
+    },
+    {
+      "id": "reviewer",
+      "version": "1.0.0",
+      "path": "guides/reviewer.md",
+      "sha256": "sha256:923e94986ccfb71d4c8cfaf4919760cd61bf9b895c5ee15c8b95b6370cabac2f",
+      "name": "Reviewer",
+      "summary": "Independent review of another agent's finished work before it counts as done.",
+      "author": "Teamtrail",
+      "types": [
+        "review"
+      ],
+      "verified": false,
+      "reviewedBy": [],
+      "history": [],
+      "builtin": true
+    },
+    {
+      "id": "security",
+      "version": "1.0.0",
+      "path": "guides/security.md",
+      "sha256": "sha256:7d33ba6d2a1bd926ce2851e25667afc7a4bf4862ba7cedd5ccd7c08408c79928",
+      "name": "Security",
+      "summary": "Looks at the change as an attacker would before it ships.",
+      "author": "Teamtrail",
+      "types": [
+        "research",
+        "task",
+        "execute",
+        "review"
+      ],
+      "verified": false,
+      "reviewedBy": [],
+      "history": [],
+      "builtin": true
+    }
+  ]
+}
