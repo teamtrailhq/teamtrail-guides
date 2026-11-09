@@ -34,9 +34,25 @@ Or open the Lookout (`npx teamtrail@next`), go to **Settings → Guides** and cl
 
 Adding a guide copies its file into `.teamtrail/guides/` and pins it in `.teamtrail/guides.lock.json`. Commit both, and your teammates get the same guide. Then give a ticket the guide in the Lookout, or let your agent do it when it plans the trail.
 
+### More catalogs
+
+Your team can run its own catalog (any repo laid out like this one, served over HTTPS). List it in `.teamtrail/guides.json`; it's searched first, then this one:
+
+```json
+{ "v": 1, "registries": [{ "name": "ours", "url": "https://raw.githubusercontent.com/acme/guides/main" }] }
+```
+
+Add `"official": false` to leave this catalog out. `guides add <id>` looks in every catalog in order and says which one the guide came from; if two catalogs have the same id, name the one you want: `npx teamtrail@next guides add ours/perf`.
+
 ## Write your own
 
-A guide is a markdown file with a short header and plain instructions:
+A guide is a markdown file with a short header and plain instructions. Start one in your project:
+
+```bash
+npx teamtrail@next guides new perf
+```
+
+That writes `.teamtrail/guides/perf.md` from a template that already passes the lint:
 
 ```markdown
 ---
@@ -56,7 +72,9 @@ license: MIT
 Measure the change on the slowest device you support, before and after, and write both numbers down.
 ```
 
-Keep it in your own project (`npx teamtrail@next guides add ./perf.md`), or share it here: see [CONTRIBUTING.md](CONTRIBUTING.md). Check it first with `npx teamtrail@next guides lint ./perf.md`.
+Fill in the instructions and checklist, check it with `npx teamtrail@next guides lint`, then approve it in the Lookout under **Settings → Guides → Write your own**. Agents can use it once you approve it, and again after every edit. Commit the file and `guides.lock.json` so your team gets it too.
+
+Useful beyond your team? Share it here: see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Safety
 
