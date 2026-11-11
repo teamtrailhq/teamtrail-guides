@@ -23,8 +23,10 @@ permissions:
   contents: read
 
 env:
+  # Both must be repinned: TEAMTRAIL_VERSION to the first release with the new guide lint, TEAMTRAIL_TOOLS_SHA to
+  # teamtrail#63's merge commit on main.
   TEAMTRAIL_VERSION: 0.24.2-next.35
-  TEAMTRAIL_TOOLS_SHA: 2cfed6fa3ff9fc1eda0e9a07c23574b2860e50d4 # teamtrail#63; repin to its merge commit on main
+  TEAMTRAIL_TOOLS_SHA: 2cfed6fa3ff9fc1eda0e9a07c23574b2860e50d4
   # npm: the public registry and no install scripts; the install step also gives it empty user and global configs
   npm_config_registry: https://registry.npmjs.org/
   npm_config_ignore_scripts: 'true'
@@ -45,7 +47,8 @@ jobs:
           BASE: ${{ github.event.pull_request.base.sha }}
           AUTHOR: ${{ github.event.pull_request.user.login }}
         run: |
-          changed="$(git diff --name-only "$BASE" HEAD)"
+          # every path on both sides of a change: a rename (git mv .github/... docs/x) is a delete and an add
+          changed="$(git diff --no-renames --name-only "$BASE" HEAD)"
           owners="$(git show "$BASE:.github/CODEOWNERS" 2>/dev/null | grep -o '@[A-Za-z0-9-]*' | tr -d @ | sort -u)"
           is_owner=false
           if printf '%s\n' "$owners" | grep -qx "$AUTHOR"; then is_owner=true; fi
@@ -111,19 +114,25 @@ jobs:
           export npm_config_userconfig="$PWD/empty-userconfig" npm_config_globalconfig="$PWD/empty-globalconfig"
           npm install --global --ignore-scripts "teamtrail@${TEAMTRAIL_VERSION}"
           echo "TEAMTRAIL_CLI=$(npm root --global)/teamtrail/dist/cli.js" >> "$GITHUB_ENV"
-      - name: Check index.json is up to date, and rebuild it when it isn't
+      - name: Check index.json is up to date, and rebuild and commit it when it isn't
+        id: build
         env:
-          GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
         run: |
           build() { node .teamtrail-tools/scripts/build-guide-catalog.mjs . --out . \
             --repo "https://github.com/$REPO" --cli "$TEAMTRAIL_CLI" "$@"; }
           if build --check; then exit 0; fi
           build
+          build --check
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.json index.html README.md
           git commit -m "Update index.json"
-          # the token is used for this one push only; the checkout didn't keep it
-          git push "https://x-access-token:${GH_TOKEN}@github.com/$REPO.git" HEAD:main
-          build --check
+          echo "push=yes" >> "$GITHUB_OUTPUT"
+      # The token reaches only this step, which runs git and nothing from the repo's content.
+      - name: Push the rebuilt index
+        if: steps.build.outputs.push == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: git push "https://x-access-token:${GH_TOKEN}@github.com/$REPO.git" HEAD:main
