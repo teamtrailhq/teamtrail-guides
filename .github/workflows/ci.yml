@@ -25,9 +25,7 @@ permissions:
 env:
   TEAMTRAIL_VERSION: 0.24.2-next.35
   TEAMTRAIL_TOOLS_SHA: 2cfed6fa3ff9fc1eda0e9a07c23574b2860e50d4 # teamtrail#63; repin to its merge commit on main
-  # npm reads only these: no user or project .npmrc, the public registry, no install scripts
-  npm_config_userconfig: /dev/null
-  npm_config_globalconfig: /dev/null
+  # npm: the public registry and no install scripts; the install step also gives it empty user and global configs
   npm_config_registry: https://registry.npmjs.org/
   npm_config_ignore_scripts: 'true'
 
@@ -76,10 +74,14 @@ jobs:
           node-version: 22
       - name: Install the Teamtrail CLI (exact version, from outside the checkout)
         working-directory: ${{ runner.temp }}
-        run: npm install --global --ignore-scripts "teamtrail@${TEAMTRAIL_VERSION}"
+        run: |
+          : > empty-userconfig; : > empty-globalconfig
+          export npm_config_userconfig="$PWD/empty-userconfig" npm_config_globalconfig="$PWD/empty-globalconfig"
+          npm install --global --ignore-scripts "teamtrail@${TEAMTRAIL_VERSION}"
+          echo "TEAMTRAIL_CLI=$(npm root --global)/teamtrail/dist/cli.js" >> "$GITHUB_ENV"
       - name: Lint every guide (schema, safety lint, a test example per guide)
         working-directory: ${{ runner.temp }}
-        run: teamtrail guides lint "$GITHUB_WORKSPACE"
+        run: node "$TEAMTRAIL_CLI" guides lint "$GITHUB_WORKSPACE"
 
   index:
     if: github.event_name == 'push'
@@ -104,14 +106,18 @@ jobs:
           node-version: 22
       - name: Install the Teamtrail CLI (exact version, from outside the checkout)
         working-directory: ${{ runner.temp }}
-        run: npm install --global --ignore-scripts "teamtrail@${TEAMTRAIL_VERSION}"
+        run: |
+          : > empty-userconfig; : > empty-globalconfig
+          export npm_config_userconfig="$PWD/empty-userconfig" npm_config_globalconfig="$PWD/empty-globalconfig"
+          npm install --global --ignore-scripts "teamtrail@${TEAMTRAIL_VERSION}"
+          echo "TEAMTRAIL_CLI=$(npm root --global)/teamtrail/dist/cli.js" >> "$GITHUB_ENV"
       - name: Check index.json is up to date, and rebuild it when it isn't
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
         run: |
           build() { node .teamtrail-tools/scripts/build-guide-catalog.mjs . --out . \
-            --repo "https://github.com/$REPO" --cli "$(npm root -g)/teamtrail/dist/cli.js" "$@"; }
+            --repo "https://github.com/$REPO" --cli "$TEAMTRAIL_CLI" "$@"; }
           if build --check; then exit 0; fi
           build
           git config user.name "github-actions[bot]"
