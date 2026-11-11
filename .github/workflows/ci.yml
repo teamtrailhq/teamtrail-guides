@@ -23,10 +23,10 @@ permissions:
   contents: read
 
 env:
-  # Both must be repinned: TEAMTRAIL_VERSION to the first release with the new guide lint, TEAMTRAIL_TOOLS_SHA to
-  # teamtrail#63's merge commit on main.
-  TEAMTRAIL_VERSION: 0.24.2-next.35
-  TEAMTRAIL_TOOLS_SHA: 2cfed6fa3ff9fc1eda0e9a07c23574b2860e50d4
+  # The Teamtrail release whose CLI lints guides, and the teamtrail commit of that release whose catalog builder runs.
+  # Repin both together, to a published version and its commit on main.
+  TEAMTRAIL_VERSION: 0.26.0-next.36
+  TEAMTRAIL_TOOLS_SHA: 1c07394ee75de2f9148cbeda14dee6ec0b673f88
   # npm: the public registry and no install scripts; the install step also gives it empty user and global configs
   npm_config_registry: https://registry.npmjs.org/
   npm_config_ignore_scripts: 'true'
