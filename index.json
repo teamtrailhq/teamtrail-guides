@@ -4,9 +4,9 @@
   "guides": [
     {
       "id": "a11y",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "path": "guides/a11y.md",
-      "sha256": "sha256:4eed4d842c1e482ff0ae10209492d7f576f9f2ca2b975686fac0c90e0da43429",
+      "sha256": "sha256:80c8a8612e8155961bc0b28a892617d0f52a3d048561b764f52382dc50c78e98",
       "name": "Accessibility",
       "summary": "Checks that new UI works with a keyboard, a screen reader and enough contrast. An example community guide.",
       "author": "Teamtrail (example)",
@@ -17,15 +17,20 @@
         "review"
       ],
       "verified": true,
+      "verifiedSha256": "sha256:80c8a8612e8155961bc0b28a892617d0f52a3d048561b764f52382dc50c78e98",
       "reviewedBy": [
-        "Teamtrail maintainers"
+        "arekom"
       ],
       "history": [
         {
           "version": "1.0.0",
           "commit": "9138782f4e6e38068cfa8caed0b68f824691be96",
-          "at": "2026-11-08T12:41:46+01:00",
-          "reviewer": "Teamtrail maintainers"
+          "at": "2026-11-08T12:41:46+01:00"
+        },
+        {
+          "version": "1.0.1",
+          "commit": "613ebcfbccccf5a8e9b34b5f5b4d1fa6fe9b845a",
+          "at": "2026-11-11T11:21:11+01:00"
         }
       ]
     },
@@ -43,16 +48,13 @@
         "prototype",
         "task"
       ],
-      "verified": true,
-      "reviewedBy": [
-        "Teamtrail maintainers"
-      ],
+      "verified": false,
+      "reviewedBy": [],
       "history": [
         {
           "version": "1.0.0",
           "commit": "9138782f4e6e38068cfa8caed0b68f824691be96",
-          "at": "2026-11-08T12:41:46+01:00",
-          "reviewer": "Teamtrail maintainers"
+          "at": "2026-11-08T12:41:46+01:00"
         }
       ],
       "builtin": true
@@ -70,16 +72,13 @@
         "task",
         "execute"
       ],
-      "verified": true,
-      "reviewedBy": [
-        "Teamtrail maintainers"
-      ],
+      "verified": false,
+      "reviewedBy": [],
       "history": [
         {
           "version": "1.0.0",
           "commit": "9138782f4e6e38068cfa8caed0b68f824691be96",
-          "at": "2026-11-08T12:41:46+01:00",
-          "reviewer": "Teamtrail maintainers"
+          "at": "2026-11-08T12:41:46+01:00"
         }
       ],
       "builtin": true
@@ -97,16 +96,13 @@
         "execute",
         "prototype"
       ],
-      "verified": true,
-      "reviewedBy": [
-        "Teamtrail maintainers"
-      ],
+      "verified": false,
+      "reviewedBy": [],
       "history": [
         {
           "version": "1.0.0",
           "commit": "9138782f4e6e38068cfa8caed0b68f824691be96",
-          "at": "2026-11-08T12:41:46+01:00",
-          "reviewer": "Teamtrail maintainers"
+          "at": "2026-11-08T12:41:46+01:00"
         }
       ],
       "builtin": true
@@ -122,16 +118,13 @@
       "types": [
         "review"
       ],
-      "verified": true,
-      "reviewedBy": [
-        "Teamtrail maintainers"
-      ],
+      "verified": false,
+      "reviewedBy": [],
       "history": [
         {
           "version": "1.0.0",
           "commit": "9138782f4e6e38068cfa8caed0b68f824691be96",
-          "at": "2026-11-08T12:41:46+01:00",
-          "reviewer": "Teamtrail maintainers"
+          "at": "2026-11-08T12:41:46+01:00"
         }
       ],
       "builtin": true
@@ -150,16 +143,13 @@
         "execute",
         "review"
       ],
-      "verified": true,
-      "reviewedBy": [
-        "Teamtrail maintainers"
-      ],
+      "verified": false,
+      "reviewedBy": [],
       "history": [
         {
           "version": "1.0.0",
           "commit": "9138782f4e6e38068cfa8caed0b68f824691be96",
-          "at": "2026-11-08T12:41:46+01:00",
-          "reviewer": "Teamtrail maintainers"
+          "at": "2026-11-08T12:41:46+01:00"
         }
       ],
       "builtin": true
