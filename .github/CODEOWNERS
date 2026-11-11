@@ -1,6 +1,4 @@
-# verified.json is what marks a guide "Verified" in Teamtrail: only a maintainer's reviewed change may edit it.
-# Branch protection on main must require a review from a code owner for this to hold.
-/verified.json @arekom
-/builtin.json @arekom
-/reported.json @arekom
-/.github/ @arekom
+# Every file is the maintainers' to approve. verified.json is what marks a guide "Verified" in Teamtrail, index.* is
+# what Teamtrail reads, and .github/ decides what CI runs. Branch protection on main must require a review from a code
+# owner for this to hold.
+* @arekom
