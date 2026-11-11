@@ -1,9 +1,9 @@
 # Lints every guide on pull requests and pushes; on main, keeps index.json and the README table up to date.
 #
 # Uses `npx teamtrail@next guides lint`, which works once the next Teamtrail release (with guides) is published.
-# The index is built by scripts/build-guide-catalog.mjs from the Teamtrail repo, with history and "Verified" from
-# git (Reviewed-by: trailers), so it needs the full history and runs after merge: a guide's own merge commit has to
-# exist before the index can name it. The bot commit only touches index.json, index.html and README.md, never a
+# The index is built by scripts/build-guide-catalog.mjs from the Teamtrail repo, with history from git and "Verified"
+# from verified.json (owned by the maintainers in .github/CODEOWNERS), so it needs the full history and runs after
+# merge: a guide's own merge commit has to exist before the index can name it, and Teamtrail fetches each guide at it. The bot commit only touches index.json, index.html and README.md, never a
 # guide, so rebuilding after it gives the same index.
 name: ci
 
