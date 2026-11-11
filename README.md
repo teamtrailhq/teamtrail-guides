@@ -19,7 +19,7 @@ This repo is the public catalog. Each guide is one plain markdown file in [`guid
 | [Security](guides/security.md) | `security` | 1.0.0 | Built in | Looks at the change as an attacker would before it ships. | Teamtrail |
 <!-- guides:end -->
 
-**Built in** guides ship with Teamtrail and work without adding anything; their copies here are for reading. **Verified** means a maintainer reviewed the current version (see [CONTRIBUTING.md](CONTRIBUTING.md)).
+**Built in** guides ship with Teamtrail and work without adding anything; their copies here are for reading. **Verified** means a maintainer reviewed this exact file: its hash is in `verified.json`, which only a maintainer's reviewed change can edit (see [CONTRIBUTING.md](CONTRIBUTING.md)).
 
 ## Add a guide to your project
 
@@ -84,7 +84,7 @@ A guide's text goes straight to your agents, so Teamtrail treats it carefully:
 - **Commands need your approval.** A guide can propose a check command, written as a program and its arguments. It doesn't run until you approve it, and it's then written to your `verification.json` like any other check. If the command changes in a new version, you're asked again.
 - **A guide can only add.** It can add checks and a checklist. It can't lower your verification level, skip a check, change who decides, or let an agent review its own work.
 - **Pinned and tamper-checked.** Every guide is pinned by its hash. If the file or its lock entry changes outside Teamtrail, the guide is switched off until you approve it again.
-- **Linted for prompt injection.** Every guide here passes `teamtrail guides lint`: it flags text that tries to override instructions, answer for the human, approve its own work, touch Teamtrail's files, hide text or send data out, and names the line.
+- **Linted for common problems.** Every guide here passes `teamtrail guides lint`: it flags text that tries to override instructions, answer for the human, approve its own work, touch Teamtrail's files, hide text or send data out, and names the line. The lint looks for patterns it knows; it isn't a review, so read a guide before you approve it.
 - **Reviewed.** Changes are merged after a maintainer reviews them. If you find a problem, use **Report** in the Lookout or [open a report](../../issues/new?template=report-guide.yml).
 
 ## License

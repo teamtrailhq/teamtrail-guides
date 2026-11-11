@@ -21,7 +21,7 @@ If you already wrote the guide for your own project (`npx teamtrail@next guides 
    - `handles.types`: the ticket types it's for (`research`, `prototype`, `junction`, `task`, `execute`, `review`).
    - `checklist`: up to 20 short items (200 characters each) the agent must answer when it finishes. Write things a person could check, not slogans.
    - `requiresChecks` (optional): names of checks the guide's tickets must pass, like `[a11y]`.
-   - `proposedChecks` (optional): a check command per name, as a program and its arguments, like `run: [npx, pa11y-ci]`. No shells (`sh -c`), no network tools, no inline code (`node -e`). Each project's trail lead approves it before it ever runs.
+   - `proposedChecks` (optional): a check command per name, as a program and its arguments, like `run: [node_modules/.bin/pa11y-ci]` or `run: [npm, run, a11y]`. Argv that itself carries code or downloads code is refused: shells, `npx` and other package runners or installs, programs that run other programs, inline code (`node -e`, `python -c`), URLs and `pkg@version` arguments, git commands that reach a remote. Test runners, linters, type checkers and build tools Teamtrail knows (`npm test`, `pytest`, `cargo test`, …) pass as they are; any other program is shown as unknown and each project's trail lead has to acknowledge it. Every check runs only after the trail lead approves it, and what repo files it runs (npm scripts, Makefiles, test files) is covered by that approval, not by the lint.
    - `license`: MIT unless you have a reason.
 3. Write the instructions below the header: what the agent should do, in plain steps. Up to 8 KB. Don't tell the agent to ignore other instructions, answer for the human, approve its own work or edit Teamtrail's files. The lint refuses those, and warns about links.
 4. Add a test example in `examples/<id>/`: a ticket (or a diff, or a transcript) to try the guide on, and what a good run looks like.
@@ -37,7 +37,7 @@ The first checks one file; the second checks the whole catalog, including that e
 
 ## Send it
 
-Push to your fork and open a pull request against `main`, one guide per PR. CI runs the same lint on every pull request. When you change an existing guide, bump its `version`. Don't edit `index.json`, `index.html` or the table in the README: they're generated after the merge.
+Push to your fork and open a pull request against `main`, one guide per PR. CI runs the same lint on every pull request. When you change an existing guide, bump its `version`. Don't edit `index.json`, `index.html` or the table in the README: they're generated after the merge, and CI refuses a pull request that changes them, or adds a `.npmrc` or `package.json`. `verified.json`, `builtin.json`, `reported.json` and `.github/` are the maintainers' to change.
 
 ## Review and Verified
 
@@ -48,23 +48,28 @@ A maintainer reads the whole guide and its example, and tries it on the example 
 - any proposed command is safe and needed;
 - nothing in it steers an agent around the human.
 
-Maintainers squash-merge with a trailer naming the reviewer:
+A guide is **Verified** only through `verified.json`, which names the reviewed file's sha256 and the reviewer's GitHub login:
 
+```json
+{
+  "v": 1,
+  "guides": {
+    "a11y": { "sha256": "sha256:…", "reviewer": "octo-maintainer" }
+  }
+}
 ```
-Add a11y guide
 
-Reviewed-by: Jane Maintainer
-```
+`verified.json` is owned by the maintainers in `.github/CODEOWNERS`, and `main` requires a code owner's review, so only a reviewed change to it marks a guide verified. Get the hash with `npx teamtrail@next guides lint --json guides/<id>.md`. A contributor never edits `verified.json`; the maintainer who reviews a guide adds or updates its entry, in the same pull request or a follow-up. Commit messages and `Reviewed-by:` trailers don't count: anyone can write those.
 
 ## How index.json is built
 
-After every merge to `main`, CI runs `scripts/build-guide-catalog.mjs` from the Teamtrail repo over this repo's full git history, and commits the result when it changed (`index.json`, `index.html` and the table in this README):
+After every merge to `main`, CI runs `scripts/build-guide-catalog.mjs` from a pinned Teamtrail commit over this repo's full git history, and commits the result when it changed (`index.json`, `index.html` and the table in this README):
 
 - every guide must pass the lint, or the build stops;
-- each commit that changed a guide becomes a history entry, with the version at that commit and the reviewer from its `Reviewed-by:` trailer;
-- a guide is **Verified** when its latest change has a reviewer;
-- a change merged without one shows as **Not reviewed** until a reviewed change lands;
-- each entry carries the file's sha256, and Teamtrail refuses a download that doesn't match it.
+- each commit that changed a guide becomes a history entry, with the version at that commit;
+- a guide is **Verified** when `verified.json` names the sha256 of its file as it is now; the index then carries that reviewed hash (`verifiedSha256`) and the reviewer's login;
+- a guide changed after its review shows as **Not reviewed** until `verified.json` names the new file;
+- each entry carries the file's sha256, and Teamtrail downloads the guide from `main`, where the index comes from, and refuses it if the hash doesn't match. It shows **Verified** only when the reviewed hash is that file's.
 
 Built-in guides (listed in `builtin.json`) are copies of the ones that ship with Teamtrail. Change those in the Teamtrail repo, not here.
 

@@ -1,0 +1,9 @@
+{
+  "v": 1,
+  "guides": {
+    "a11y": {
+      "sha256": "sha256:80c8a8612e8155961bc0b28a892617d0f52a3d048561b764f52382dc50c78e98",
+      "reviewer": "arekom"
+    }
+  }
+}
