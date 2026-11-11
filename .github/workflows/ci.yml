@@ -90,8 +90,10 @@ jobs:
     if: github.event_name == 'push'
     needs: lint
     runs-on: ubuntu-latest
+    # Pushing uses the INDEX_DEPLOY_KEY deploy key (main's ruleset lets only deploy keys push without a pull request),
+    # so the workflow token stays read-only.
     permissions:
-      contents: write
+      contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -129,10 +131,16 @@ jobs:
           git add index.json index.html README.md
           git commit -m "Update index.json"
           echo "push=yes" >> "$GITHUB_OUTPUT"
-      # The token reaches only this step, which runs git and nothing from the repo's content.
+      # The deploy key reaches only this step, which runs git and nothing from the repo's content. GitHub's host key is
+      # pinned (from https://api.github.com/meta), so the key is offered to github.com only.
       - name: Push the rebuilt index
         if: steps.build.outputs.push == 'yes'
         env:
-          GH_TOKEN: ${{ github.token }}
+          DEPLOY_KEY: ${{ secrets.INDEX_DEPLOY_KEY }}
           REPO: ${{ github.repository }}
-        run: git push "https://x-access-token:${GH_TOKEN}@github.com/$REPO.git" HEAD:main
+        run: |
+          dir="$(mktemp -d)"; trap 'rm -rf "$dir"' EXIT
+          ( umask 077; printf '%s\n' "$DEPLOY_KEY" > "$dir/key" )
+          echo 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' > "$dir/known_hosts"
+          GIT_SSH_COMMAND="ssh -i $dir/key -o IdentitiesOnly=yes -o UserKnownHostsFile=$dir/known_hosts -o StrictHostKeyChecking=yes" \
+            git push "git@github.com:$REPO.git" HEAD:main
