@@ -6,14 +6,14 @@ Thanks for sharing a guide. This page covers how to write one, check it, send it
 
 1. Fork this repo and clone your fork.
 2. Add your guide as `guides/<id>.md` and a test example in `examples/<id>/`.
-3. Run `npx teamtrail@next guides lint .` until it's clean.
+3. Run `npx teamtrail guides lint .` until it's clean.
 4. Open a pull request, one guide per PR.
 
 A maintainer reviews and merges it; CI then rebuilds `index.json`, and the guide shows up in `teamtrail guides search` and the Lookout's catalog.
 
 ## Write it
 
-If you already wrote the guide for your own project (`npx teamtrail@next guides new <id>`), copy `.teamtrail/guides/<id>.md` into `guides/` here. Otherwise copy one of the files in `guides/`.
+If you already wrote the guide for your own project (`npx teamtrail guides new <id>`), copy `.teamtrail/guides/<id>.md` into `guides/` here. Otherwise copy one of the files in `guides/`.
 
 1. Save it as `guides/<id>.md`. The `id` is short and kebab-case (`a11y`, `api-design`), matches the file name, and isn't one of the built-in guides' ids (`builtin.json`).
 2. Fill in the header:
@@ -29,11 +29,11 @@ If you already wrote the guide for your own project (`npx teamtrail@next guides 
 ## Check it locally
 
 ```bash
-npx teamtrail@next guides lint guides/<id>.md
-npx teamtrail@next guides lint .
+npx teamtrail guides lint guides/<id>.md
+npx teamtrail guides lint .
 ```
 
-The first checks one file; the second checks the whole catalog, including that every guide has an example. Every finding names its line. Try the guide in a real project with `npx teamtrail@next guides add ./guides/<id>.md` (that copies it into the project and pins it there).
+The first checks one file; the second checks the whole catalog, including that every guide has an example. Every finding names its line. Try the guide in a real project with `npx teamtrail guides add ./guides/<id>.md` (that copies it into the project and pins it there).
 
 ## Send it
 
@@ -59,7 +59,7 @@ A guide is **Verified** only through `verified.json`, which names the reviewed f
 }
 ```
 
-`verified.json` is owned by the maintainers in `.github/CODEOWNERS`, and `main` requires a code owner's review, so only a reviewed change to it marks a guide verified. Get the hash with `npx teamtrail@next guides lint --json guides/<id>.md`. A contributor never edits `verified.json`; the maintainer who reviews a guide adds or updates its entry, in the same pull request or a follow-up. Commit messages and `Reviewed-by:` trailers don't count: anyone can write those.
+`verified.json` is owned by the maintainers in `.github/CODEOWNERS`, and `main` requires a code owner's review, so only a reviewed change to it marks a guide verified. Get the hash with `npx teamtrail guides lint --json guides/<id>.md`. A contributor never edits `verified.json`; the maintainer who reviews a guide adds or updates its entry, in the same pull request or a follow-up. Commit messages and `Reviewed-by:` trailers don't count: anyone can write those.
 
 ## How index.json is built
 
