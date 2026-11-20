@@ -1,4 +1,4 @@
-![Teamtrail guides](.github/banner.png)
+<img src=".github/banner.png?v=2" alt="The teamtrail wordmark in white with its blaze-orange dot, the words Guide catalog, and the headline &quot;Bring a guide for the hard stretches.&quot; Under it: reviewer, QA, security, docs and architect come built in; find community guides here, or add your own with a pull request. The command npx teamtrail guides add a11y sits on a blaze-orange bar. Six flat guide icons on square tiles surround it on a dark dot grid: a magnifier for reviewer, a shield for security, a check for QA, an open book for docs, a compass for architect and a plus for community guides, with a trail stepping in from the left." width="100%" />
 
 # Teamtrail guides
 
@@ -26,11 +26,11 @@ This repo is the public catalog. Each guide is one plain markdown file in [`guid
 From your repo:
 
 ```bash
-npx teamtrail@next guides search accessibility
-npx teamtrail@next guides add a11y
+npx teamtrail guides search accessibility
+npx teamtrail guides add a11y
 ```
 
-Or open the Lookout (`npx teamtrail@next`), go to **Settings → Guides** and click **Browse guides**. You see each guide's author, review history, checklist, the commands it proposes and its full instructions before you add it.
+Or open the Lookout (`npx teamtrail`), go to **Settings → Guides** and click **Browse guides**. You see each guide's author, review history, checklist, the commands it proposes and its full instructions before you add it.
 
 Adding a guide copies its file into `.teamtrail/guides/` and pins it in `.teamtrail/guides.lock.json`. Commit both, and your teammates get the same guide. Then give a ticket the guide in the Lookout, or let your agent do it when it plans the trail.
 
@@ -42,14 +42,14 @@ Your team can run its own catalog (any repo laid out like this one, served over 
 { "v": 1, "registries": [{ "name": "ours", "url": "https://raw.githubusercontent.com/acme/guides/main" }] }
 ```
 
-Add `"official": false` to leave this catalog out. `guides add <id>` looks in every catalog in order and says which one the guide came from; if two catalogs have the same id, name the one you want: `npx teamtrail@next guides add ours/perf`.
+Add `"official": false` to leave this catalog out. `guides add <id>` looks in every catalog in order and says which one the guide came from; if two catalogs have the same id, name the one you want: `npx teamtrail guides add ours/perf`.
 
 ## Write your own
 
 A guide is a markdown file with a short header and plain instructions. Start one in your project:
 
 ```bash
-npx teamtrail@next guides new perf
+npx teamtrail guides new perf
 ```
 
 That writes `.teamtrail/guides/perf.md` from a template that already passes the lint:
@@ -72,7 +72,7 @@ license: MIT
 Measure the change on the slowest device you support, before and after, and write both numbers down.
 ```
 
-Fill in the instructions and checklist, check it with `npx teamtrail@next guides lint`, then approve it in the Lookout under **Settings → Guides → Write your own**. Agents can use it once you approve it, and again after every edit. Commit the file and `guides.lock.json` so your team gets it too.
+Fill in the instructions and checklist, check it with `npx teamtrail guides lint`, then approve it in the Lookout under **Settings → Guides → Write your own**. Agents can use it once you approve it, and again after every edit. Commit the file and `guides.lock.json` so your team gets it too.
 
 Useful beyond your team? Share it here: see [CONTRIBUTING.md](CONTRIBUTING.md).
 
